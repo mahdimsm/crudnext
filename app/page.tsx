@@ -90,7 +90,7 @@ export default function products() {
               <td className="px-6 py-3 text-gray-800">{product.rating.rate}</td>
               <td className="space-x-4 px-6 py-3 text-end">
                 <button className="text-blue-600">Edit</button>
-                <button className="text-red-600">Delete</button>
+                <button className="text-red-600" onClick={()=>{handleDelete(product.id)}}>Delete</button>
               </td>
             </tr>
           ))}
@@ -98,4 +98,12 @@ export default function products() {
       </table>
     </div>
   );
+
+  function handleDelete(id:number){
+    const newlist = products.filter((li)=>li.id !==id)
+    setProducts(newlist);
+  }
+
+
 }
+
