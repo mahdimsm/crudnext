@@ -41,6 +41,8 @@ export default function Add() {
         setProducts((prevList:any) => {
           return prevList.concat(newlist);
         });
+
+
         titleRef.current.value = "";
         priceRef.current.value = "";
         desRef.current.value = "";

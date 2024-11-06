@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import { createContext, useEffect,useState } from 'react'
+import { createContext, useContext, useEffect,useState } from 'react'
 
 export type IProduct= {
     id: number;
@@ -11,16 +11,18 @@ export type IProduct= {
     image: string;
     rating: Rating;
   }
-  interface Rating {
+  type Rating= {
     rate: number;
     count: number;
   }
+type a={
+   products:IProduct[],
+   setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>
 
+}
 
+export const ProductContext = createContext<a | undefined>(undefined);
 
-export const ProductContext = createContext({
-  
-})
 
 export default function ProductProvider({
     children,
@@ -28,7 +30,7 @@ export default function ProductProvider({
     children: React.ReactNode;
   }>) {
 
-    const [products, setProducts] = useState<IProduct[]>();
+    const [products, setProducts] = useState<IProduct[]>([]);
     const fetchRecords = async () => {
       const response = await axios.get("https://fakestoreapi.com/products");
       setProducts(response.data);
@@ -37,8 +39,9 @@ export default function ProductProvider({
       fetchRecords();
     }, []);
 
+    
     const value ={
-        products
+        products 
         ,setProducts
     };
 
