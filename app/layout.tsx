@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import ProductProvider from "@/components/ProductProvider";
+
+
 
 
 
@@ -17,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+      <ProductProvider>{children}</ProductProvider>
       </body>
     </html>
   );

@@ -1,30 +1,13 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-export interface IProduct {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: Rating;
-}
-interface Rating {
-  rate: number;
-  count: number;
-}
+import { ProductContext } from "@/components/ProductProvider";
+import { IProduct } from "@/components/ProductProvider";
+
 export default function products() {
-  const [products, setProducts] = useState<IProduct[]>();
-  const fetchRecords = async () => {
-    const response = await axios.get("https://fakestoreapi.com/products");
-    setProducts(response.data);
-  };
-  useEffect(() => {
-    fetchRecords();
-  }, []);
+ const {products, setProducts}=useContext(ProductContext)
   return (
     <div className="px-48 py-20">
       <div className="flex justify-between">
@@ -85,7 +68,7 @@ export default function products() {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {products?.map((product) => (
+          {products?.map((product:IProduct) => (
             <tr key={product.id}>
               <td className="px-6 py-3 text-gray-800">{product.id}</td>
               <td className="px-6 py-3 text-gray-800">{product.title}</td>
