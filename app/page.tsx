@@ -12,7 +12,7 @@ export default function products() {
     <div className="px-48 py-20">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold">List products</h1>
-        <button className="px-4 py-2 bg-green-500 rounded text-white">Create New product</button>
+        <Link href={'/add'} className="px-4 py-2 bg-green-500 rounded text-white">Create New product</Link>
       </div>
       <table className="divide-y divide-gray-200 w-full mt-6">
         <thead className="bg-gray-50">

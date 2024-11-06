@@ -1,6 +1,6 @@
 'use client'
 import axios from 'axios';
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useEffect,useState } from 'react'
 
 export type IProduct= {
     id: number;
@@ -19,8 +19,7 @@ export type IProduct= {
 
 
 export const ProductContext = createContext({
-    products: [],
-    setProducts: ()=>{}
+  
 })
 
 export default function ProductProvider({
@@ -38,7 +37,7 @@ export default function ProductProvider({
       fetchRecords();
     }, []);
 
-    const value :{ products: IProduct[], setProducts:()=>{} }={
+    const value ={
         products
         ,setProducts
     };
