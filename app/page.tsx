@@ -17,10 +17,10 @@ interface Rating {
   count: number;
 }
 export default function products() {
-  const [products, setproducts] = useState<IProduct[]>();
+  const [products, setProducts] = useState<IProduct[]>();
   const fetchRecords = async () => {
     const response = await axios.get("https://fakestoreapi.com/products");
-    setproducts(response.data);
+    setProducts(response.data);
   };
   useEffect(() => {
     fetchRecords();
