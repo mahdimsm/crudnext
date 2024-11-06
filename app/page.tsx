@@ -100,8 +100,8 @@ export default function products() {
   );
 
   function handleDelete(id:number){
-    const newlist = products.filter((li)=>li.id !==id)
-    setProducts(newlist);
+    const newProducts = products.filter((product:IProduct)=>product.id !==id)
+    setProducts(newProducts);
   }
 
 
