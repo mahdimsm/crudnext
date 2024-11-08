@@ -10,18 +10,15 @@ export type IProduct= {
     category: string;
     image: string;
     rating: Rating;
+
   }
   type Rating= {
     rate: number;
     count: number;
   }
-type a={
-   products:IProduct[],
-   setProducts: React.Dispatch<React.SetStateAction<IProduct[]>>
 
-}
 
-export const ProductContext = createContext<a | undefined>(undefined);
+export const ProductContext = createContext<any>({});
 
 
 export default function ProductProvider({
