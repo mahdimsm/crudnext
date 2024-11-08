@@ -2,8 +2,9 @@
 import { IProduct, ProductContext } from "@/components/ProductProvider";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import {  toast } from 'react-toastify';
 
 export default function Edit() {
   const router = useRouter();
@@ -40,6 +41,19 @@ export default function Edit() {
   const [values, setValues] = useState(editList);
 
   /////////////////////////////////////////
+  const editRecord = async (product:IProduct) => {
+    const response = await axios.put(`https://fakestoreapi.com/products/${product.id}`,product);
+     if(response.status==200){
+      alert();
+     }
+  };
+  const alert=()=>{
+    toast.success("Product successffully Edited.",{
+      position:"top-center"
+    })
+  }
+
+
   const handleChanges = (e: any) => {
     if (e.target.name == "rate" || e.target.name == "count") {
       setValues({
@@ -60,7 +74,7 @@ export default function Edit() {
     setProducts(
       [...newProducts, values].sort((a, b) => (a.id > b.id ? 1 : -1))
     );
-
+  editRecord(values);
     router.push("/");
   }
 
@@ -158,7 +172,7 @@ export default function Edit() {
               type="submit"
               className="w-[20%] px-4 py-2 hover:bg-green-400 bg-green-500 text-white rounded-md"
             >
-              Add
+              Edit
             </button>
           </div>
         </form>

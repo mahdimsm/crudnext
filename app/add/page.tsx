@@ -1,8 +1,9 @@
 "use client";
 import { IProduct, ProductContext } from "@/components/ProductProvider";
 import { useRouter } from "next/navigation";
-
+import {  toast } from 'react-toastify';
 import { useContext, useState } from "react";
+import axios from "axios";
 
 export default function Add() {
   const router = useRouter();
@@ -28,6 +29,18 @@ export default function Add() {
     },
     image: "",
   });
+
+  const addRecord = async (product:IProduct) => {
+    const response = await axios.post("https://fakestoreapi.com/products",product);
+     if(response.status==200){
+      alert();
+     }
+  };
+  const alert=()=>{
+    toast.success("Product successffully added.",{
+      position:"top-center"
+    })
+  }
 
   const handleChanges = (e: any) => {
     if (e.target.name == "rate" || e.target.name == "count") {
@@ -59,7 +72,7 @@ export default function Add() {
     setProducts((prevList: any) => {
       return prevList.concat(newlist);
     });
-
+    addRecord(newlist);
     setValues({
       id: id,
       title: "",
@@ -72,9 +85,14 @@ export default function Add() {
       },
       image: "",
     });
+    
+    
     router.push("/");
     // console.log(values)
   }
+
+
+
 
   return (
     <div className=" mb-20  mt-20 mx-48 ">

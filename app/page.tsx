@@ -1,20 +1,38 @@
 "use client";
 import Link from "next/link";
 import { useContext,  useState } from "react";
-
+import {  toast } from 'react-toastify';
 import Image from "next/image";
 import { ProductContext } from "@/components/ProductProvider";
 import { IProduct } from "@/components/ProductProvider";
+import axios from "axios";
 
-type a = {
-  current: IProduct;
-  lists: IProduct[];
-  setList: (...any: any) => {};
-};
 
 export default function products() {
   const { products, setProducts } = useContext<any>(ProductContext);
   const [updateState, setUpdateState] = useState<number>(-1);
+
+  const deleteRecord = async (id:number) => {
+    const response = await axios.delete(`https://fakestoreapi.com/products/${id}`);
+     if(response.status==200){
+      alert();
+     }
+  };
+  const alert=()=>{
+    toast.success("Product successffully deleted.",{
+      position:"top-center"
+    })
+  };
+
+
+  function handleDelete(id: number) {
+    const newProducts = products.filter(
+      (product: IProduct) => product.id !== id
+    );
+    setProducts(newProducts);
+    deleteRecord(id);
+  }
+
   return (
     <div className="px-48 py-20">
       <div className="flex justify-between">
@@ -134,10 +152,8 @@ export default function products() {
     </div>
   );
 
-  function handleDelete(id: number) {
-    const newProducts = products.filter(
-      (product: IProduct) => product.id !== id
-    );
-    setProducts(newProducts);
-  }
+
+
+ 
+
 }
